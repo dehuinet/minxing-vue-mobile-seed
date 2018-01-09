@@ -12,7 +12,7 @@ const routes = [{
   path: '/',
   component: Home,
 }];
-// 测试一下吧22
+// 测试一下吧333
 const router = new VueRouter({
   routes,
 });
