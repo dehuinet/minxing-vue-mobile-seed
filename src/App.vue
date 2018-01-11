@@ -1,19 +1,109 @@
 <template>
+
+
+
   <div id="app">
-    <router-view></router-view>
+        <drawer
+            width="200px;"
+            :show.sync="drawerVisibility"
+            :show-mode="showModeValue"
+            :placement="showPlacementValue"
+            :drawer-style="{'background-color':'#35495e', width: '200px'}">
+            <div slot="drawer">
+                <group title="Drawer demo(beta)" style="margin-top:20px;">
+                    <cell title="Demo" link="/demo" value="演示" @click.native="drawerVisibility = false">
+                    </cell>
+                    <cell title="Buy me a coffee" link="project/donate" @click.native="drawerVisibility = false">
+                    </cell>
+                    <cell title="Github" link="./hello" value="Star me" @click.native="drawerVisibility = false">
+                    </cell>
+                </group>
+                <group title="showMode">
+                    <radio v-model="showMode" :options="['push', 'overlay']" @on-change="onShowModeChange"></radio>
+                </group>
+                <group title="placement">
+                    <radio v-model="showPlacement" :options="['left', 'right']" @on-change="onPlacementChange"></radio>
+                </group>
+            </div>
+            <view-box ref="viewBox" body-padding-top="46px" body-padding-bottom="55px">
+              <x-header slot="header"
+                style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+                :left-options="leftOptions"
+                :right-options="rightOptions"
+                title="title"
+                @on-click-more="onShowMenuClick">
+              </x-header>
+              <router-view></router-view>
+            </view-box>
+        </drawer>
   </div>
 </template>
 
+
 <script>
+import { Radio, Drawer, Group, Cell, ViewBox, XHeader } from 'vux';
+
 export default {
-  name: 'app',
+  components: {
+    Radio,
+    Drawer,
+    Group,
+    Cell,
+    ViewBox,
+    XHeader,
+  },
+  methods: {
+    onShowModeChange(val) {
+      this.drawerVisibility = false;
+      setTimeout(() => {
+        this.showModeValue = val;
+      }, 400);
+    },
+    onPlacementChange(val) {
+      this.drawerVisibility = false;
+      setTimeout(() => {
+        this.showPlacementValue = val;
+      }, 400);
+    },
+    onShowMenuClick() {
+      this.drawerVisibility = true;
+    }
+  },
+  computed: {
+    leftOptions() {
+      return { showBack: false };
+    },
+    rightOptions() {
+      return { showMore: true };
+    },
+  },
+  data() {
+    return {
+      showMenu: false,
+      drawerVisibility: false,
+      showMode: 'overlay',
+      showModeValue: 'overlay',
+      showPlacement: 'left',
+      showPlacementValue: 'left',
+    };
+  },
 };
 </script>
 
-<style lang="less">
+<style lang='less'>
 @import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/tap.less';
 
 body {
   background-color: #fbf9fe;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+#app{
+  height: 100%;
 }
 </style>
