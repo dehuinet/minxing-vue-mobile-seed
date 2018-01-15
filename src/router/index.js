@@ -4,6 +4,7 @@ import Login from '@/components/Login';
 import List from '@/components/List';
 import Detail from '@/components/Detail';
 import Home from '@/components/HelloFromVux';
+import Query from '@/components/Query';
 import HelloWorld from '@/components/HelloWorld';
 
 Vue.use(Router);
@@ -18,12 +19,16 @@ export default new Router({
       name: 'Login',
       component: Login,
     }, {
-      path: '/todo',
-      name: 'TODO',
+      path: '/query',
+      name: 'Query',
+      component: Query,
+    },, {
+      path: '/list',
+      name: 'List',
       component: List,
     }, {
-      path: '/todo/:id',
-      name: 'TODO_DETAIL',
+      path: '/list/:id',
+      name: 'List_Detail',
       component: Detail,
     }, {
       path: '/undo',

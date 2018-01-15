@@ -30,7 +30,7 @@
                 style="width:100%;position:absolute;left:0;top:0;z-index:100;"
                 :left-options="leftOptions"
                 :right-options="rightOptions"
-                title="title"
+                :title="title"
                 @on-click-more="onShowMenuClick">
               </x-header>
               <router-view></router-view>
@@ -52,6 +52,11 @@ export default {
     ViewBox,
     XHeader,
   },
+  data() {
+    return {
+      title:''
+    }
+  },
   methods: {
     onShowModeChange(val) {
       this.drawerVisibility = false;
@@ -71,7 +76,29 @@ export default {
   },
   computed: {
     leftOptions() {
-      return { showBack: false };
+      var vm = this;
+      let name = this.$route.name
+      switch (name) {
+        case 'Login':
+          vm.title = '登录';
+          return { showBack: false };
+          break;
+        case 'Query':
+          vm.title = '查询';
+          return { showBack: false };
+          break;
+        case 'List':
+          vm.title = '列表';
+          return { showBack: true };
+          break;
+        case 'List_Detail':
+          vm.title = '详情';
+          return { showBack: true };
+          break;
+        default:
+          vm.title = '';
+          return { showBack: true };
+      }
     },
     rightOptions() {
       return { showMore: true };
