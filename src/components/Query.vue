@@ -4,7 +4,7 @@
             <div class="title">请选择需要查询的栏目</div>
             <popup-radio title="栏目" :options="options" v-model="option" placeholder="请选择"></popup-radio>
         </group>
-        <x-button class="m-top" :text="submitBtnText" :disabled="enableQuery" :show-loading="queryStatus" @click.native="query" type="primary"></x-button>
+        <x-button class="m-top" :text="submitBtnText" :disabled="!option" @click.native="query" type="primary"></x-button>
     </div>
 </template>
 <script>
@@ -18,7 +18,7 @@ export default {
     },
     data() {
         return {
-            queryStatus: false,
+            submitBtnText: '查询',
             option: '',
             options: [{
                 key: 20,
@@ -35,27 +35,13 @@ export default {
             }]
         }
     },
-    computed: {
-        enableQuery() {
-            return !(!!this.option)
-        },
-        submitBtnText() {
-            return this.queryStatus ? '查询中' : '查询'
-        },
-    },
     methods: {
         query() {
             var vm = this;
-            vm.queryStatus = true;
             vm.$store.dispatch('getListFn', {
                 cate: vm.option
-            }).then(function(res) {
-                if (vm.$store.state.list.length > 0) {
-                    vm.$router.push('list');
-                }else{
-                    alert('暂无数据');
-                }
             })
+            vm.$router.push('list');
         },
     }
 }

@@ -9,6 +9,7 @@
 <script>
 import { Panel, LoadMore } from 'vux';
 import * as types from '../store/types.js';
+import {mapGetters} from 'vuex';
 
 export default {
     components: {
@@ -25,7 +26,7 @@ export default {
     methods: {
         checkDetail(item) {
             var vm = this;
-            vm.$router.push('list/' + item.contentId);
+            vm.$router.push('list/' + item.id);
         },
         loadMore() {
             var vm = this;
@@ -38,9 +39,13 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            getListQuery: 'getListQuery',
+            list: 'getListData'
+        }),
         titile() {
             var vm = this;
-            switch (vm.$store.state.queryInfo.cate) {
+            switch (vm.getListQuery.cate) {
                 case 20:
                     return "全行要闻";
                     break;
@@ -57,11 +62,8 @@ export default {
                     return "新闻列表"
             }
         },
-        list() {
-            return vm.$store.state.list.data
-        },
         tip() { 
-            if (vm.showLoading) {
+            if (this.showLoading) {
                 return '正在加载'
             }
             return this.$store.state.list.full

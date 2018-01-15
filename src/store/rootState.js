@@ -1,20 +1,20 @@
 const state = {
-    userInfo: {
-        id: 0,
-        loginName: "",
+    user: {
+        id: "",
         name: "",
-        password: "",
         token: ""
     },
-    queryInfo: {
-        page: 1,
-        limit: 5,
-        cate: 20, 
-    },
+
     list: {
+        query: {
+            page: 1,
+            limit: 5,
+            cate: null,
+        },
         full: false,
-        data: []
+        data: [],
+        detail:{},
+        scrollTop: null
     },
-    contentId:0,
 }
 export default state;

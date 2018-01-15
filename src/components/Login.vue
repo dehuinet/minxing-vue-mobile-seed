@@ -28,8 +28,8 @@ export default {
     data() {
         return {
             submitStatus: false,
-            id: '',
-            password: '',
+            id: '001170',
+            password: '123456',
         }
     },
     computed: {
@@ -47,17 +47,10 @@ export default {
             vm.$store.dispatch('loginFn', {
                 id: vm.id,
                 password: vm.password
-            }).then(function(res) {
-                var token = !!vm.$store.state.userInfo.token;
-                console.log(token);
-                if (token) {
-                    vm.$router.push('query');
-                }
             })
+            .then(() => vm.$router.push('query'))
+            .catch(e => console.log('登录失败', e));
         }
-    },
-    mounted() {
-        var vm = this;
     }
 }
 

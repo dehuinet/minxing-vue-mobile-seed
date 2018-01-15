@@ -1,5 +1,5 @@
 import { login } from '../http/login';
-import { getList } from '../http/list';
+import { getList, getDetail } from '../http/list';
 import * as types from './types.js';
 
 export const loginFn = ({
@@ -7,46 +7,53 @@ export const loginFn = ({
     state
 }, payload) => {
     return login(payload)
-        .then(res => {
-            return res;
-        })
+        .then(user => {
+            commit(types.AUTH_LOGIN, user);
+        });
 }
 
 //  根据栏目 初始化LIST
 export const getListFn = ({
     commit,
-    state
+    state,
+    getters
 }, payload) => {
-    commit(types.QUERY_INIT, payload);
-
+    commit(types.LIST_QUERY_INIT, payload);
     var params = {
-        ...state.queryInfo,
-        id: state.userInfo.id,
+        ...getters.getListQuery,
+        id: getters.getUser.id
     }
-    return getList(params)
-        .then(data => {
-            commit(types.LIST_INIT, {
-                list: data
-            });
-            return res;
+    getList(params)
+        .then(list => {
+            commit(types.LIST_LOAD, { list });
         })
 }
 
 // 加载更多 PAGE++
 export const getMoreList = ({
     commit,
-    state
+    state,
+    getters
 }) => {
     commit(types.QUERY_LOAD_MORE);
     var params = {
-        ...state.queryInfo,
-        id: state.userInfo.id,
+        ...getters.getListQuery,
+        id: getters.getUser.id,
     }
     return getList(params)
-        .then(data => {
-            commit(types.LIST_LOAD_MORE, {
-                list: data
-            })
-            return res;
+        .then(list => {
+            commit(types.LIST_LOAD_MORE, { list })
         })
+}
+
+
+export const getDetailFn = ({
+    commit,
+    state,
+    getters
+}, { id }) => {
+    commit(types.DETAIL_INIT);
+    getDetail({id}).then(detail => {
+        commit(types.DETAIL_LOAD, { detail })
+    })
 }
