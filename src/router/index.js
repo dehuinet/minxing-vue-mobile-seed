@@ -4,10 +4,10 @@ import Login from '@/components/Login';
 import List from '@/components/List';
 import Detail from '@/components/Detail';
 import Query from '@/components/Query';
-
+import store from '@/store';
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -24,10 +24,30 @@ export default new Router({
       path: '/list',
       name: 'List',
       component: List,
+      beforeEnter: (to, from, next) => {
+        if (store.state.list.query.cate) {
+          next()
+        }else{
+          router.push('/query');
+        }
+      }
     }, {
       path: '/list/:id',
-      name: 'List_Detail',
+      name: 'Detail',
       component: Detail,
     }
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  console.log('store state->', Object.assign({}, store.state));
+  console.log('store->', store.state.user);
+  console.log('(to.name->',to.name === 'Login');
+  if (to.name === 'Login' || store.state.user.token) {
+    console.log('????')
+    next();
+  } else {
+    router.push('/login');
+  }
+})
+export default router

@@ -1,15 +1,23 @@
 import { login } from '../http/login';
 import { getList, getDetail } from '../http/list';
 import * as types from './types.js';
-
+const ls = window.localStorage;
 export const loginFn = ({
     commit,
     state
 }, payload) => {
     return login(payload)
         .then(user => {
+            ls['VUE_DEMO_USER'] = JSON.stringify(user);
             commit(types.AUTH_LOGIN, user);
         });
+}
+
+export const logoutFn = ({
+    commit,
+}) => {
+    ls['VUE_DEMO_USER'] = null;
+    commit(types.AUTH_LOGOUT);
 }
 
 //  根据栏目 初始化LIST
@@ -53,7 +61,7 @@ export const getDetailFn = ({
     getters
 }, { id }) => {
     commit(types.DETAIL_INIT);
-    getDetail({id}).then(detail => {
+    return getDetail({id}).then(detail => {
         commit(types.DETAIL_LOAD, { detail })
     })
 }

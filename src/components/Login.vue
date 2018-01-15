@@ -51,6 +51,9 @@ export default {
             .then(() => vm.$router.push('query'))
             .catch(e => console.log('登录失败', e));
         }
+    },
+    created() {
+        this.$store.state.user.token && this.$router.push('query');
     }
 }
 
