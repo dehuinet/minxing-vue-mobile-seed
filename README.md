@@ -1,6 +1,6 @@
-# vux-demo
+# minxing-vue-mobile-seed
 
-> A Vue.js project
+> 敏行vue框架，移动端种子工程
 
 ## Build Setup
 
@@ -8,8 +8,14 @@
 # install dependencies
 npm install
 
+# run mock server at localhost:3030
+npm run mock
+
 # serve with hot reload at localhost:8080
 npm run dev
+
+#run mock server and dev-server
+npm run mockdev
 
 # build for production with minification
 npm run build
@@ -20,11 +26,6 @@ npm run build --report
 # run unit tests
 npm run unit
 
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

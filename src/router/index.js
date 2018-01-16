@@ -20,7 +20,7 @@ const router = new Router({
       path: '/query',
       name: 'Query',
       component: Query,
-    },, {
+    }, {
       path: '/list',
       name: 'List',
       component: List,
