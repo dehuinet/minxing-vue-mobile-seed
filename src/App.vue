@@ -158,9 +158,7 @@ export default {
 @import '~vux/src/styles/1px.less';
 @import '~vux/src/styles/tap.less';
 
-body {
-    background-color: #fbf9fe;
-}
+
 
 html,
 body {
@@ -168,7 +166,9 @@ body {
     width: 100%;
     overflow-x: hidden;
 }
-
+body {
+    background-color: #fbf9fe;
+}
 #app {
     height: 100%;
 }
