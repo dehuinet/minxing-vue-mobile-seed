@@ -16,7 +16,7 @@ export const loginFn = ({
 export const logoutFn = ({
     commit,
 }) => {
-    ls['VUE_DEMO_USER'] = null;
+    delete ls['VUE_DEMO_USER'];
     commit(types.AUTH_LOGOUT);
 }
 

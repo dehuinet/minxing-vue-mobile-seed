@@ -6,7 +6,6 @@
             <div v-if="detail.modifiedDate" class="desc">修改&nbsp;&nbsp;{{detail.modifiedDate}}&nbsp;&nbsp;{{detail.creater}}</div>
             <div v-html="detail.content"></div>
         </div>
-        <loading :show='loading' text="loading"></loading>
     </div>
 </template>
 <script>
@@ -23,7 +22,6 @@ export default {
     },
     data() {
         return {
-            loading: true
         }
     },
     computed: {
@@ -33,9 +31,12 @@ export default {
     },
     created() {
         var vm = this;
-        const id = this.$route.params.id;
+        const id = vm.$route.params.id;
+        vm.$vux.loading.show({
+             text: 'Loading'
+            })
         vm.$store.dispatch('getDetailFn', { id }).then(function() {
-            vm.loading = false
+            vm.$vux.loading.hide()
         });
     },
 };

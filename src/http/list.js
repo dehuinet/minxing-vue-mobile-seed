@@ -46,7 +46,7 @@ export function getDetail({id}) {
 						}
 					}, {}))
 				});
-				}, 3000);
+				}, 1000);
 	})
     // return http.get(url, {params})
     //     .then(({ data }) => {

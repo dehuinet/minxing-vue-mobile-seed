@@ -34,7 +34,7 @@ export default {
     },
     computed: {
         enableSubmit() {
-            return !(!!this.id && !!this.password)
+            return ((!this.id && !this.password) || this.submitStatus)
         },
         submitBtnText() {
             return this.submitStatus ? '登录中' : '登录'
@@ -49,7 +49,14 @@ export default {
                 password: vm.password
             })
             .then(() => vm.$router.push('query'))
-            .catch(e => console.log('登录失败', e));
+            .catch(e => {
+                        vm.$vux.toast.show({
+                            type:'text',
+                            time:'4000',
+                            text: e.error
+                        });
+                        vm.submitStatus = false
+            });
         }
     },
     created() {

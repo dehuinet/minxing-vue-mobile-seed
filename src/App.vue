@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-import { Radio, Drawer, Group, Cell, ViewBox, XHeader } from 'vux';
+import { Radio, Drawer, Group, Cell, ViewBox, XHeader, Toast } from 'vux';
 import { LIST_SCROLL_TOP, AUTH_LOGOUT } from "./store/types.js"
 
 export default {
@@ -40,14 +40,15 @@ export default {
         Cell,
         ViewBox,
         XHeader,
+        Toast
     },
     data() {
         return {
-            title: ''
+            title: '',
+            show:true
         }
     },
     mounted() {
-
     },
     methods: {
         onShowModeChange(val) {
@@ -80,7 +81,10 @@ export default {
             this.$store.dispatch('logoutFn');
             this.$router.push('/login');
             this.drawerVisibility = false;
-        }
+        },
+        // show() {
+        //     return this.showToast
+        // }
     },
     computed: {
         leftOptions() {

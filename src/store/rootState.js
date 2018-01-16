@@ -17,7 +17,14 @@ const state = {
         scrollTop: null
     },
 }
-state.user = window.localStorage['VUE_DEMO_USER'] ? JSON.parse(window.localStorage['VUE_DEMO_USER']) : state.user;
+console.log("window.localStorage['VUE_DEMO_USER']",window.localStorage['VUE_DEMO_USER'])
+if (window.localStorage['VUE_DEMO_USER']) {
+    console.log('has ls', typeof window.localStorage['VUE_DEMO_USER']);
+    state.user = JSON.parse(window.localStorage['VUE_DEMO_USER']);
+} 
+// state.user = window.localStorage['VUE_DEMO_USER'] 
+//     ? JSON.parse(window.localStorage['VUE_DEMO_USER'])
+//     : state.user;
 console.log('state->', state);
 
 export default state;

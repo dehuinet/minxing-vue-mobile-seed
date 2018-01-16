@@ -7,7 +7,10 @@ import App from './App';
 import router from './router';
 import http from './http';
 import store from './store';
+import  { ToastPlugin, LoadingPlugin } from 'vux'
 
+Vue.use(ToastPlugin)
+Vue.use(LoadingPlugin)
 
 FastClick.attach(document.body);
 

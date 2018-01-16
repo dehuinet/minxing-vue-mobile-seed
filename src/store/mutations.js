@@ -27,7 +27,6 @@ export default {
         }
     },
     [types.LIST_LOAD]: (state, { list }) => {
-        console.log('LIST_INIT->', list);
         const full = list.length < state.list.query.limit;
         state.list = {
             ...state.list,
