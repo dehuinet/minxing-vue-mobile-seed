@@ -39,11 +39,13 @@ export default {
     },
     data() {
         return {
-            title: '',
-            show:true
-        }
-    },
-    mounted() {
+            showMenu: false,
+            drawerVisibility: false,
+            showMode: 'overlay',
+            showModeValue: 'overlay',
+            showPlacement: 'left',
+            showPlacementValue: 'left',
+        };
     },
     methods: {
         onShowModeChange(val) {
@@ -76,10 +78,7 @@ export default {
             this.$store.dispatch('logoutFn');
             this.$router.push('/login');
             this.drawerVisibility = false;
-        },
-        // show() {
-        //     return this.showToast
-        // }
+        }
     },
     computed: {
         leftOptions() {
@@ -119,6 +118,8 @@ export default {
             }
         },
     },
+    mounted() {
+    },
     watch: {
         '$route' (to, from) {
             if (to.name === 'List') {
@@ -139,17 +140,7 @@ export default {
                 this.box && this.box.removeEventListener('scroll', this.handler, false)
             }
         }
-    },
-    data() {
-        return {
-            showMenu: false,
-            drawerVisibility: false,
-            showMode: 'overlay',
-            showModeValue: 'overlay',
-            showPlacement: 'left',
-            showPlacementValue: 'left',
-        };
-    },
+    }
 };
 
 </script>

@@ -9,7 +9,7 @@
 <script>
 import { Panel, LoadMore } from 'vux';
 import * as types from '../store/types.js';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {

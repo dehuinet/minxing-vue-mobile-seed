@@ -40,11 +40,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log('store state->', Object.assign({}, store.state));
-  console.log('store->', store.state.user);
-  console.log('(to.name->',to.name === 'Login');
   if (to.name === 'Login' || store.state.user.token) {
-    console.log('????')
     next();
   } else {
     router.push('/login');
