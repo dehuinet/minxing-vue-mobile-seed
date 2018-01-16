@@ -8,10 +8,10 @@ const axiosInstance = axios.create({
 	timeout: 1000
 })
 // axiosInstance.interceptors.request.use(function(config) {
-// 	console.log("config",config);
-// 	var id = config.url.split('');
-// 	console.log("store.state.user",store.state.user);
-// 	return config
+// 	if (store.state.user.token) {
+// 		config.headers.token = store.state.user.token;
+// 	}
+// 	return config;
 // }, function(error) {
 // 	return Promise.reject(error)
 // });
