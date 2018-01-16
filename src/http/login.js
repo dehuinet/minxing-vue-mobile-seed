@@ -4,6 +4,7 @@ import store from '../store'
 
 export function login({id, password}) {
     const url = `api/user?id=${id}`;
+    console.log('before login!!!');
     return new Promise((resolve, reject) => {
         http.get(url)
         .then(({ data }) => {
@@ -22,9 +23,10 @@ export function login({id, password}) {
             } else {
                 reject({
                     error: '密码错误'
-                })
+                });
                 return;
             }
-        });
+        })
+        .catch(e => console.log('login error->', e));
     })
 }
