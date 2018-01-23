@@ -1,3 +1,1 @@
-export default {
-  baseURL: process.env.baseURL
-};
+export const baseURL = process.env.baseURL
